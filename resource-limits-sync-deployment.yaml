@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: limitpolicy-sync
-        image: wrkode/limitpolicy-sync:v1.0-alpha7
+        image: wrkode/limitpolicy-sync:v1.0-alpha8
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
