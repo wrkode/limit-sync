@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: limitpolicy-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: limitpolicy-sync
+  template:
+    metadata:
+      labels:
+        app: limitpolicy-sync
+    spec:
+      containers:
+      - name: limitpolicy-sync
+        image: wrkode/limitpolicy-sync:v1.0-alpha7
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: limitpolicy-sync
+spec:
+  selector:
+    app: limitpolicy-sync
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000

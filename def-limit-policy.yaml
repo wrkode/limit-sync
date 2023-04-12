@@ -1,0 +1,9 @@
+apiVersion: oks.io/v1
+kind: LimitPolicy
+metadata:
+  name: default-limitpolicy
+spec:
+  resources:
+    cpu: "400m"
+    memory: "128Mi"
+    ephemeral-storage: "500Mi"

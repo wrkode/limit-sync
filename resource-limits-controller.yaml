@@ -1,0 +1,19 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: CompositeController
+metadata:
+  name: limitpolicy-controller
+spec:
+  generateSelector: true
+  resyncPeriodSeconds: 30
+  parentResource:
+    apiVersion: oks.io/v1
+    resource: limitpolicies
+  childResources:
+  - apiVersion: apps/v1
+    resource: deployments
+    updateStrategy:
+      method: InPlace
+  hooks:
+    sync:
+      webhook:
+        url: http://limitpolicy-sync.default.svc.cluster.local:80/sync
